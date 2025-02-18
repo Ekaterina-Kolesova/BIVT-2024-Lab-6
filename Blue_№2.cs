@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab6
+namespace Lab_6gitgit
 {
     public class Blue_2
     {
@@ -13,33 +13,37 @@ namespace Lab6
             //поля
             private string _name;
             private string _surname;
-            private int[,] _marks; // 5 * 2
+            private int[,] _marks; // 5 * 2 => 2 * 5
             private bool[] _isJumpMarked; // 2
 
             //свойства
             public string Name => _name;
             public string Surname => _surname;
-            public int[,] Marks
+            public int[,] Marks // changed
             {
                 get
                 {
-                    int[,] copy = new int[5, 2];
-                    for(int i = 0; i < 5; i++)
+                    if (_marks == null) return null;
+
+                    int[,] copy = new int[2, 5];
+                    for(int i = 0; i < 2; i++)
                     {
-                        for(int j = 0; j < 2; j++)
+                        for(int j = 0; j < 5; j++)
                             copy[i, j] = _marks[i, j];
                     }
                     return copy;
                 }
             }
-            public int TotalScore
+            public int TotalScore // changed
             {
                 get
                 {
+                    if (_marks == null) return 0;
+
                     int totalScore = 0;
-                    for (int i = 0; i < 5; i++)
+                    for (int i = 0; i < 2; i++)
                     {
-                        for (int j = 0; j < 2; j++)
+                        for (int j = 0; j < 5; j++)
                             totalScore += _marks[i, j];
                     }
                     //Console.WriteLine($"{_name} {_surname}'s total score is {totalScore}");
@@ -52,7 +56,7 @@ namespace Lab6
             {
                 _name = name;
                 _surname = surname;
-                _marks = new int[5, 2];
+                _marks = new int[2, 5]; //changed
                 _isJumpMarked = new bool[2];
             }
 
@@ -61,6 +65,7 @@ namespace Lab6
             public void Jump(int[] result)
             {
                 if (result == null || result.Length != 5) return;
+                if (_marks == null || _isJumpMarked == null) return;
 
                 int jumpNum = 0;
                 while (_isJumpMarked[jumpNum] && jumpNum < _isJumpMarked.Length) // поиск неоценённого прыжка
@@ -69,7 +74,7 @@ namespace Lab6
                     return;
 
                 for(int k = 0;k < 5; k++)
-                    _marks[k, jumpNum] = result[k];
+                    _marks[jumpNum, k] = result[k]; // changed
                 _isJumpMarked[jumpNum] = true;
             }
             public static void Sort(Participant[] array)
@@ -93,12 +98,12 @@ namespace Lab6
             {
                 Console.WriteLine($"{_name} {_surname}'s marks:");
                 Console.WriteLine("             First Jump   Second Jump   Total Score");
-                for (int i = 0; i < _marks.GetLength(0); i++)
+                for (int i = 0; i < _marks.GetLength(1); i++) //
                 {
                     Console.Write($"judge №{i + 1} ");
-                    for (int j = 0; j < _marks.GetLength(1); j++)
+                    for (int j = 0; j < _marks.GetLength(0); j++) //
                     {
-                        Console.Write($"{_marks[i, j], 12}");
+                        Console.Write($"{_marks[j, i], 12}"); //
                     }
                     int totalScore = TotalScore;
                     Console.WriteLine($"{TotalScore, 12}");

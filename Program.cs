@@ -1,4 +1,4 @@
-﻿using Lab6;
+﻿using Lab_6;
 using System;
 
 namespace MyApp

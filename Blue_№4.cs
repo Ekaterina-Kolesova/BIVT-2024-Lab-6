@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Lab6
+namespace Lab_6
 {
     public class Blue_4
     {
@@ -14,7 +14,7 @@ namespace Lab6
         {
             //поля
             private string _name;
-            private int[] _scores; //20
+            private int[] _scores; //
             private int _playedMatchesNum;
 
             //свойства
@@ -23,6 +23,8 @@ namespace Lab6
             { 
                 get
                 {
+                    if (_scores == null) return null;
+
                     int[] copy = new int[_scores.Length];
                     for (int k = 0; k < copy.Length; k++)
                         copy[k] = _scores[k];
@@ -33,6 +35,8 @@ namespace Lab6
             {
                 get
                 {
+                    if (_scores == null) return 0;
+
                     int totalScore = 0;
                     for (int k = 0; k < _scores.Length; k++)
                         totalScore += _scores[k];
@@ -44,14 +48,30 @@ namespace Lab6
             public Team(string name)
             {
                 _name = name;
-                _scores = new int[20];
+                _scores = new int[0];
                 _playedMatchesNum = 0;
             }
-            
+
             //методы
+            private void IncreaseCapasity()
+            {
+                if (_scores == null || _scores.Length == 0)
+                {
+                    _scores = new int[1];
+                    return;
+                }
+
+                int[] tmp = new int[_scores.Length + 1];
+                int k = 0;
+                foreach (int score in _scores)
+                    tmp[k++] = score;
+                _scores = tmp;
+            }
+
             public void PlayMatch(int result)
             {
-                if (_playedMatchesNum >= _scores.Length) return;
+                if (_playedMatchesNum >= _scores.Length || _scores == null) 
+                    IncreaseCapasity();
                 _scores[_playedMatchesNum] = result;
                 _playedMatchesNum++;
             }
@@ -78,7 +98,9 @@ namespace Lab6
             {
                 get
                 {
-                    Team[] copy = new Team[_teams.Length];
+                    if (_teams == null) return null;
+
+                    Team[] copy = new Team[_teams.Length]; //!!!
                     for (int k = 0; k < copy.Length; k++)
                         copy[k] = _teams[k];
                     return copy;
@@ -96,14 +118,14 @@ namespace Lab6
             //методы
             public void Add(Team team)
             {
-                if (_teamsNum >= _teams.Length) return;
+                if (_teamsNum >= _teams.Length) return;//!!!
 
                 _teams[_teamsNum] = team;
                 _teamsNum++;
             }
             public void Add(Team[] teams) 
             {
-                if (_teamsNum >= _teams.Length || teams == null || teams.Length == 0)
+                if (_teamsNum >= _teams.Length || teams == null || teams.Length == 0)//!!!
                     return;
 
                 int k = 0;

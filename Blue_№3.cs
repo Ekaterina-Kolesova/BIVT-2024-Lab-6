@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab6
+namespace Lab_6
 {
     public class Blue_3
     {
@@ -13,7 +13,7 @@ namespace Lab6
             //поля
             private string _name;
             private string _surname;
-            private int[] _penaltyTimes; //10
+            private int[] _penaltyTimes; //
             private int _playedMatchesNum;
 
             //свойства
@@ -23,7 +23,9 @@ namespace Lab6
             {
                 get
                 {
-                    int[] copy = new int[_penaltyTimes.Length];
+                    if (_penaltyTimes == null) return null;
+
+                    int[] copy = new int[_penaltyTimes.Length];//!!!
                     for(int k = 0; k < copy.Length; k++)
                         copy[k] = _penaltyTimes[k];
                     return copy;
@@ -33,8 +35,10 @@ namespace Lab6
             {
                 get
                 {
+                    if (_penaltyTimes == null) return 0;
+                    
                     int totalTime = 0;
-                    for(int k = 0; k < _penaltyTimes.Length; k++) 
+                    for(int k = 0; k < _penaltyTimes.Length; k++) //!!!
                         totalTime += _penaltyTimes[k];
                     return totalTime;
                 }
@@ -43,7 +47,8 @@ namespace Lab6
             {
                 get
                 {
-                    for(int k = 0 ; k < _penaltyTimes.Length; k++)
+                    
+                    for (int k = 0 ; k < _penaltyTimes.Length; k++)
                     {
                         if(_penaltyTimes[k] == 10)
                             return true;
@@ -57,14 +62,31 @@ namespace Lab6
             {
                 _name = name;
                 _surname = surname;
-                _penaltyTimes = new int[10];
+                _penaltyTimes = new int[0];
                 _playedMatchesNum = 0;
             }
 
             //методы
+            private void IncreaseCapasity()
+            {
+                if(_penaltyTimes == null || _penaltyTimes.Length == 0 )
+                {
+                    _penaltyTimes = new int[1];
+                    return;
+                }
+
+                int[] tmp = new int[_penaltyTimes.Length + 1];
+                int k = 0;
+                foreach(int time  in _penaltyTimes)
+                    tmp[k++] = time;
+                _penaltyTimes = tmp;
+            }
+
             public void PlayMatch(int time)
             {
-                if (_playedMatchesNum >= _penaltyTimes.Length) return;
+                if (_playedMatchesNum >= _penaltyTimes.Length || _penaltyTimes == null)
+                    IncreaseCapasity();
+
                 _penaltyTimes[_playedMatchesNum] = time;
                 _playedMatchesNum++;
             }
@@ -76,7 +98,7 @@ namespace Lab6
                 {
                     for (int j = 0; j < array.Length - i - 1; j++)
                     {
-                        if (array[j + 1].TotalTime < array[j].TotalTime)
+                        if (array[j + 1].TotalTime < array[j].TotalTime) //!!!
                         {
                             Participant tmp = array[j + 1];
                             array[j + 1] = array[j];

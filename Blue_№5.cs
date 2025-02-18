@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Lab6
+namespace Lab_6
 {
     public class Blue_5
     {
@@ -53,6 +53,8 @@ namespace Lab6
             {
                 get
                 {
+                    if (_sportsmen == null) return null;
+
                     Sportsman[] copy = new Sportsman[_sportsmen.Length];
                     for (int k = 0; k < copy.Length; k++)
                         copy[k] = _sportsmen[k];
@@ -63,6 +65,8 @@ namespace Lab6
             {
                 get
                 {
+                    if (_sportsmen == null) return 0;
+
                     int sum = 0;
                     for (int k = 0; k < _sportsmenNum; k++)
                     {
@@ -77,6 +81,8 @@ namespace Lab6
             {
                 get
                 {
+                    if (_sportsmen == null) return 0;
+
                     int top = _sportsmen[0].Place;
                     for (int k = 1; k < _sportsmenNum; k++)
                     {
