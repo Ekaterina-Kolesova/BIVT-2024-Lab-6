@@ -43,7 +43,7 @@ namespace Lab_6
             }
             public void Print()
             {
-                Console.WriteLine($"{_name} {_name} has {_votes} votes");
+                Console.WriteLine($"{_name} {_surname} has {_votes} votes");
             }
         }//struct Response
     }
