@@ -19,8 +19,8 @@ namespace Lab_6
 
             //свойства
             public string Name => _name;
-            public int[] Scores 
-            { 
+            public int[] Scores
+            {
                 get
                 {
                     if (_scores == null) return null;
@@ -70,18 +70,19 @@ namespace Lab_6
 
             public void PlayMatch(int result)
             {
-                if (_playedMatchesNum >= _scores.Length || _scores == null) 
+                if (_scores == null) return;
+                if (_playedMatchesNum >= _scores.Length)
                     IncreaseCapasity();
                 _scores[_playedMatchesNum] = result;
                 _playedMatchesNum++;
             }
             public void Print()
             {
-                Console.Write($"{_name, 10} :");
+                Console.Write($"{_name,10} :");
                 for (int k = 0; k < _scores.Length; k++)
                     Console.Write($"{_scores[k],4}");
                 //Console.WriteLine();
-                Console.WriteLine($"Total score - {TotalScore}");
+                Console.WriteLine($"    Total score - {TotalScore}");
             }
         }//struct Team
 
@@ -114,22 +115,22 @@ namespace Lab_6
                 _teams = new Team[12];
                 _teamsNum = 0;
             }
-            
+
             //методы
             public void Add(Team team)
             {
-                if (_teamsNum >= _teams.Length) return;//!!!
+                if (_teamsNum >= _teams.Length) return;//_teams.Length = 12
 
                 _teams[_teamsNum] = team;
                 _teamsNum++;
             }
-            public void Add(Team[] teams) 
+            public void Add(Team[] teams)
             {
-                if (_teamsNum >= _teams.Length || teams == null || teams.Length == 0)//!!!
+                if (_teamsNum >= _teams.Length || teams == null || teams.Length == 0)//_teams.Length = 12
                     return;
 
                 int k = 0;
-                while(_teamsNum < _teams.Length && k < teams.Length)
+                while (_teamsNum < _teams.Length && k < teams.Length)//_teams.Length = 12
                 {
                     _teams[_teamsNum] = teams[k];
                     _teamsNum++;
@@ -186,8 +187,9 @@ namespace Lab_6
             public void Print()
             {
                 Console.WriteLine(_name);
-                for(int k = 0; k < _teamsNum; k++)
+                for (int k = 0; k < _teamsNum; k++)
                     _teams[k].Print();
+                Console.WriteLine();
             }
 
         }//struct Group
