@@ -31,7 +31,7 @@ namespace Lab_6
             //методы
             public void SetPlace(int place)
             {
-                if (_place != 0 || place < 1) return;
+                if (_place > 0 || place < 1) return; //если место уже есть или передано некорректное место
                 _place = place;
             }
             public void Print()
@@ -136,7 +136,7 @@ namespace Lab_6
                             teams[j + 1] = teams[j];
                             teams[j] = tmp;
                         }
-                        else if(teams[j + 1].SummaryScore == teams[j].SummaryScore &&
+                        else if (teams[j + 1].SummaryScore == teams[j].SummaryScore &&
                             teams[j + 1].TopPlace < teams[j].TopPlace)
                         {
                             Team tmp = teams[j + 1];
@@ -149,8 +149,9 @@ namespace Lab_6
             public void Print()
             {
                 Console.WriteLine(_name);
-                for(int k = 0; k < _sportsmenNum; k++)
+                for (int k = 0; k < _sportsmenNum; k++)
                     _sportsmen[k].Print();
+                Console.WriteLine();
             }
         }//struct Team
     }
