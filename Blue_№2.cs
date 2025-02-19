@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab_6gitgit
+namespace Lab_6
 {
     public class Blue_2
     {
@@ -26,9 +26,9 @@ namespace Lab_6gitgit
                     if (_marks == null) return null;
 
                     int[,] copy = new int[2, 5];
-                    for(int i = 0; i < 2; i++)
+                    for (int i = 0; i < 2; i++)
                     {
-                        for(int j = 0; j < 5; j++)
+                        for (int j = 0; j < 5; j++)
                             copy[i, j] = _marks[i, j];
                     }
                     return copy;
@@ -61,7 +61,7 @@ namespace Lab_6gitgit
             }
 
             //методы
-            
+
             public void Jump(int[] result)
             {
                 if (result == null || result.Length != 5) return;
@@ -69,18 +69,18 @@ namespace Lab_6gitgit
 
                 int jumpNum = 0;
                 while (_isJumpMarked[jumpNum] && jumpNum < _isJumpMarked.Length) // поиск неоценённого прыжка
-                     jumpNum++;
+                    jumpNum++;
                 if (jumpNum >= _isJumpMarked.Length) // все прыжки оценены
                     return;
 
-                for(int k = 0;k < 5; k++)
+                for (int k = 0; k < 5; k++)
                     _marks[jumpNum, k] = result[k]; // changed
                 _isJumpMarked[jumpNum] = true;
             }
             public static void Sort(Participant[] array)
             {
                 if (array == null || array.Length == 0) return;
-                
+
                 for (int i = 0; i < array.Length - 1; i++)
                 {
                     for (int j = 0; j < array.Length - i - 1; j++)
@@ -97,17 +97,18 @@ namespace Lab_6gitgit
             public void Print()
             {
                 Console.WriteLine($"{_name} {_surname}'s marks:");
-                Console.WriteLine("             First Jump   Second Jump   Total Score");
-                for (int i = 0; i < _marks.GetLength(1); i++) //
+                Console.Write("             First Jump   Second Jump   Total Score");
+                for (int i = 0; i < _marks.GetLength(1); i++)
                 {
+                    Console.WriteLine();
                     Console.Write($"judge №{i + 1} ");
-                    for (int j = 0; j < _marks.GetLength(0); j++) //
+                    for (int j = 0; j < _marks.GetLength(0); j++)
                     {
-                        Console.Write($"{_marks[j, i], 12}"); //
+                        Console.Write($"{_marks[j, i],12}");
                     }
-                    int totalScore = TotalScore;
-                    Console.WriteLine($"{TotalScore, 12}");
                 }
+                int totalScore = TotalScore;
+                Console.WriteLine($"{TotalScore,12}");
             }
         }//struct Participant
     }
