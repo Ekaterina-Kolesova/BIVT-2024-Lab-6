@@ -64,7 +64,7 @@ namespace Lab_6
 
             public void Jump(int[] result)
             {
-                if (result == null || result.Length != 5) return;
+                if (result == null) return; 
                 if (_marks == null || _isJumpMarked == null) return;
 
                 int jumpNum = 0;

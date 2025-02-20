@@ -105,6 +105,8 @@ namespace Lab_6
             public void Add(Sportsman sportsman)
             {
                 if (_sportsmenNum >= _sportsmen.Length) return;
+                if (_sportsmen == null)
+                    _sportsmen = new Sportsman[6];
 
                 _sportsmen[_sportsmenNum] = sportsman;
                 _sportsmenNum++;
@@ -113,6 +115,8 @@ namespace Lab_6
             {
                 if (_sportsmenNum >= _sportsmen.Length || sportsmen == null || sportsmen.Length == 0)
                     return;
+                if (_sportsmen == null)
+                    _sportsmen = new Sportsman[6];
 
                 int k = 0;
                 while (_sportsmenNum < _sportsmen.Length && k < sportsmen.Length)

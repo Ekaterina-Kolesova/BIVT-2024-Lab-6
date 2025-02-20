@@ -119,18 +119,22 @@ namespace Lab_6
             //методы
             public void Add(Team team)
             {
-                if (_teamsNum >= _teams.Length) return;//_teams.Length = 12
+                if (_teamsNum >= _teams.Length) return;
+                if (_teams == null)
+                    _teams = new Team[12];
 
                 _teams[_teamsNum] = team;
                 _teamsNum++;
             }
             public void Add(Team[] teams)
             {
-                if (_teamsNum >= _teams.Length || teams == null || teams.Length == 0)//_teams.Length = 12
+                if (_teamsNum >= _teams.Length || teams == null || teams.Length == 0)
                     return;
+                if (_teams == null)
+                    _teams = new Team[12];
 
                 int k = 0;
-                while (_teamsNum < _teams.Length && k < teams.Length)//_teams.Length = 12
+                while (_teamsNum < _teams.Length && k < teams.Length)  
                 {
                     _teams[_teamsNum] = teams[k];
                     _teamsNum++;
