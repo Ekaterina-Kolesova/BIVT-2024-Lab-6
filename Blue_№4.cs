@@ -117,12 +117,22 @@ namespace Lab_6
             }
 
             //методы
+            private bool IsTeamInGroup(Team team)
+            {
+                if (_teamsNum == 0) return false;
+                for (int k = 0; k < _teamsNum; k++)
+                {
+                    if (_teams[k].Name == team.Name)
+                        return true;
+                }
+                return false;
+            }
             public void Add(Team team)
             {
                 if (_teamsNum >= _teams.Length) return;
+                if (IsTeamInGroup(team)) return;
                 if (_teams == null)
                     _teams = new Team[12];
-
                 _teams[_teamsNum] = team;
                 _teamsNum++;
             }
@@ -134,10 +144,13 @@ namespace Lab_6
                     _teams = new Team[12];
 
                 int k = 0;
-                while (_teamsNum < _teams.Length && k < teams.Length)  
+                while (_teamsNum < _teams.Length && k < teams.Length)
                 {
-                    _teams[_teamsNum] = teams[k];
-                    _teamsNum++;
+                    if (!IsTeamInGroup(teams[k]))
+                    {
+                        _teams[_teamsNum] = teams[k];
+                        _teamsNum++;
+                    }
                     k++;
                 }
             }
