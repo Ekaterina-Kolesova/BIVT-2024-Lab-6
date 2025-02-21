@@ -104,19 +104,15 @@ namespace Lab_6
             //методы
             public void Add(Sportsman sportsman)
             {
-                if (_sportsmenNum >= _sportsmen.Length) return;
-                if (_sportsmen == null)
-                    _sportsmen = new Sportsman[6];
+                if (_sportsmen == null || _sportsmenNum >= _sportsmen.Length) return;
 
                 _sportsmen[_sportsmenNum] = sportsman;
                 _sportsmenNum++;
             }
             public void Add(Sportsman[] sportsmen)
             {
-                if (_sportsmenNum >= _sportsmen.Length || sportsmen == null || sportsmen.Length == 0)
+                if (_sportsmen == null || sportsmen == null || sportsmen.Length == 0 || _sportsmenNum >= _sportsmen.Length)
                     return;
-                if (_sportsmen == null)
-                    _sportsmen = new Sportsman[6];
 
                 int k = 0;
                 while (_sportsmenNum < _sportsmen.Length && k < sportsmen.Length)
