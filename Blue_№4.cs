@@ -130,7 +130,7 @@ namespace Lab_6
             public void Add(Team team)
             {
                 if (_teams == null || _teamsNum >= _teams.Length) return;
-                if (IsTeamInGroup(team)) return;
+                //if (IsTeamInGroup(team)) return;
                 _teams[_teamsNum] = team;
                 _teamsNum++;
             }
@@ -142,11 +142,9 @@ namespace Lab_6
                 int k = 0;
                 while (_teamsNum < _teams.Length && k < teams.Length)
                 {
-                    if (!IsTeamInGroup(teams[k]))
-                    {
-                        _teams[_teamsNum] = teams[k];
-                        _teamsNum++;
-                    }
+                    //if (!IsTeamInGroup(teams[k]))
+                    _teams[_teamsNum] = teams[k];
+                    _teamsNum++;//end if
                     k++;
                 }
             }
